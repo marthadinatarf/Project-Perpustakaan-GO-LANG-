@@ -70,3 +70,24 @@ func (br *BookRepo) DeleteBook(id int) (entity.Book, error) {
 	return book, nil
 
 }
+
+// Func SelectBookById untuk menampilkan buku sesuai ID buku
+func (br *BookRepo) SelectBookById(id int) (entity.Book, error) {
+	var book entity.Book
+
+	if err := br.Db.First(&book).Where("id = ?", id).Error; err != nil {
+		log.Warn(err)
+		return entity.Book{}, errors.New("tidak bisa menampilkan buku sesuai id")
+	}
+	log.Info()
+	return book, nil
+}
+
+//func SelectBookByPenerbit untuk menampilkan buku sesuai penerbit
+func (br *BookRepo) SelectBookByPenerbit(penerbit string) ([]entity.Book, error) {
+	var book []entity.Book
+	if err := br.Db.Find(&book).Where("penerbit like ?", "%"+penerbit+"%").Error; err != nil {
+		return book, err
+	}
+	return book, nil
+}
