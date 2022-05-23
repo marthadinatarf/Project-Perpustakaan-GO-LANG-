@@ -56,3 +56,17 @@ func (br *BookRepo) UpdateBook(id int, update entity.Book) (entity.Book, error) 
 	log.Info()
 	return book, nil
 }
+
+// Func DeleteBook untuk menghapus buku sesuai ID buku
+func (br *BookRepo) DeleteBook(id int) (entity.Book, error) {
+	var book entity.Book
+
+	if err := br.Db.Delete(&book).Where("id = ?", id).Error; err != nil {
+		log.Warn(err)
+		return entity.Book{}, errors.New("tidak bisa menghapus buku")
+	}
+
+	log.Info()
+	return book, nil
+
+}
