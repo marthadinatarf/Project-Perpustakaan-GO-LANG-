@@ -117,3 +117,11 @@ func StatusGetDatIdOK(data interface{}) map[string]interface{} {
 		"data":    data,
 	}
 }
+func StatusGetDatPenerbitOK(data interface{}) map[string]interface{} {
+	return map[string]interface{}{
+		"code":    http.StatusOK,
+		"message": "Success get data by Penerbit",
+		"status":  true,
+		"data":    data,
+	}
+}
